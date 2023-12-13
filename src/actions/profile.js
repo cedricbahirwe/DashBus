@@ -174,7 +174,7 @@ export const okok = ({ start, end }) => async dispatch => {
 }
 
 
-export const searchBuses = ({ start, end }) => {
+export const searchBuses = ({ start, end }) => async dispatch => {
     // console.log("third")
     try {
         const res = axios.get(`/api/search/${start}/${end}`).then((hii) => {
@@ -187,9 +187,9 @@ export const searchBuses = ({ start, end }) => {
         // console.log(res)
     } catch (err) {
         const errors = err.response.data.errors
-        // if (errors) {
-        //     errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
-        // }
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
         console.log('error here')
     }
 }

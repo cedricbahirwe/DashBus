@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { searchBuses } from '../../actions/profile'
@@ -13,7 +13,7 @@ const Landing = () => {
 
     });
     const { start, end, date } = formData;
-    const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+    // const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const handleToCity = e => {
         e.preventDefault()
         setFormData({ ...formData, [e.target.name]: e.target.value })
