@@ -83,7 +83,7 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div className="relative bg-white w-full overflow-hidden text-center text-xl text-white font-inter">
+        <div className="bg-white w-full overflow-hidden text-center text-xl text-white font-inter">
 
             <div className="w-full h-[605px]"
                 style={{
@@ -111,7 +111,65 @@ const HomePage = () => {
                 </div>
             </div>
 
-            <div className="bottom-[0px] left-[calc(50%_-_720px)] flex flex-col items-start justify-start text-left text-5xl text-gray-200">
+            <div className="flex flex-col items-start justify-start gap-[30px] text-left text-black my-5 ">
+                <div className='text-4xl m3 self-center'>
+                    <b>Our Features</b>
+                </div>
+
+                <div className="flex flex-row items-start justify-start py-2.5 px-0 gap-[50px]">
+                    <img
+                        className="bg-slate-300 rounded-3xl w-[500px] h-[300px] object-cover"
+                        alt="Ritco Bus"
+                        src={process.env.PUBLIC_URL + '/busritco.png'}
+                    />
+                    <div className="self-stretch flex flex-col items-start justify-start gap-[35px]">
+                        <b className="text-2xl">
+                            Easy Ticket Booking
+                        </b>
+                        <div className="text-xl font-medium text-gray-400 ">
+                            Our user-friendly ticketing booking system allows you to
+                            conveniently purchase tickets of your choice any time you want to
+                            travel.
+                        </div>
+                        <div
+                            className="rounded-xl bg-royalblue w-[198px] text-center py-5 px-[15px] box-border cursor-pointer text-xl text-white"
+                            onClick={onBookMainCTA2Click}
+                        >
+                            <b className="relative">Book Ticket Now</b>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-row items-start justify-start py-2.5 px-0 gap-[50px]">
+                    <img
+                        className="bg-slate-300 rounded-3xl w-[500px] h-[300px] object-contain"
+                        alt="Invoice Picture"
+                        src={process.env.PUBLIC_URL + '/invoice.png'}
+                    />
+                    <div className="self-stretch flex flex-col items-start justify-start gap-[15px]">
+                        <b className="text-2xl pt-4">
+                            Quick e-Invoice
+                        </b>
+                        <div className="text-xl font-medium text-gray-400">
+                            <span>
+                                <p className='m-0'>
+                                    Elevate your bus ticketing experience with our advanced
+                                    e-invoice system!
+                                </p>
+                                <p className='mt-2'>
+                                    Streamline transactions, cut paperwork, and enjoy swift,
+                                    hassle-free payments for a more efficient and eco-friendly
+                                    journey."
+                                </p>
+                            </span>
+                        </div>
+                        <div className="rounded-xl bg-royalblue w-[198px] text-center py-5 px-[15px] box-border text-xl text-white">
+                            <b className="relative">Learn More</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="flex flex-col items-start justify-start text-left text-4xl text-gray-200">
                 <div className="w-full bg-dimgray flex flex-col items-center justify-center py-[35px] px-2.5 box-border">
                     <div className="rounded-[25px] bg-white w-[600px] flex flex-row items-center justify-start gap-[15px]">
                         <input placeholder='Enter your email address'
@@ -149,62 +207,8 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
-            {/* <div className="absolute top-[917px] left-[120px] flex flex-col items-start justify-start gap-[30px] text-left text-21xl text-black">
-                <div className="self-stretch flex flex-row items-center justify-center p-2.5 text-center text-29xl">
-                    <b className="relative">Our Features</b>
-                </div>
-                <div className="flex flex-row items-start justify-start py-2.5 px-0 gap-[70px]">
-                    <img
-                        className="relative rounded-6xl w-[593px] h-[404px] object-cover"
-                        alt=""
-                        src="/rectangle-8@2x.png"
-                    />
-                    <div className="self-stretch flex flex-col items-start justify-start gap-[35px]">
-                        <b className="relative flex items-center w-[470px]">
-                            Easy Ticket Booking
-                        </b>
-                        <div className="relative text-5xl font-medium text-gray-400 flex items-center w-[511px]">
-                            Our user-friendly ticketing booking system allows you to
-                            conveniently purchase tickets of your choice any time you want to
-                            travel.
-                        </div>
-                        <div
-                            className="rounded-xl bg-royalblue w-[198px] flex flex-row items-center justify-center py-5 px-[15px] box-border cursor-pointer text-xl text-white"
-                            onClick={onBookMainCTA2Click}
-                        >
-                            <b className="relative">Book Ticket Now</b>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-row items-start justify-start py-2.5 px-0 gap-[70px]">
-                    <img
-                        className="relative rounded-6xl w-[603px] h-[417px] object-cover"
-                        alt=""
-                        src="/rectangle-81@2x.png"
-                    />
-                    <div className="self-stretch flex flex-col items-start justify-start gap-[35px]">
-                        <b className="relative flex items-center w-[470px]">
-                            Quick e-Invoice
-                        </b>
-                        <div className="relative text-5xl font-medium text-gray-400 flex items-center w-[511px]">
-                            <span className="[line-break:anywhere] w-full">
-                                <p className="[margin-block-start:0] [margin-block-end:14px]">
-                                    Elevate your bus ticketing experience with our advanced
-                                    e-invoice system!
-                                </p>
-                                <p className="m-0">
-                                    Streamline transactions, cut paperwork, and enjoy swift,
-                                    hassle-free payments for a more efficient and eco-friendly
-                                    journey."
-                                </p>
-                            </span>
-                        </div>
-                        <div className="rounded-xl bg-royalblue w-[198px] flex flex-row items-center justify-center py-5 px-[15px] box-border text-xl text-white">
-                            <b className="relative">Learn More</b>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+
+
         </div >
     );
 };
