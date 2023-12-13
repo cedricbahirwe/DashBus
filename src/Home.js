@@ -85,8 +85,6 @@ const HomePage = () => {
     return (
         <div className="relative bg-white w-full overflow-hidden text-center text-xl text-white font-inter">
 
-            {/* <link rel="manifest" href="%PUBLIC_URL%/logo512.png" /> */}
-            {/* <div className={'w-full h-[100px] bg-slate-300 bg-'}> */}
             <div className="w-full h-[605px]"
                 style={{
                     backgroundImage: `url(${process.env.PUBLIC_URL}/womanbg.png)`,
@@ -113,40 +111,36 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {/* <div className{/* <div */}
-            {/* className="absolute top-[10px] w-full h-[1px] object-cover bg-slate-300" */}
-            {/* /> */}
-
-            {/* <div className="absolute bottom-[0px] left-[calc(50%_-_720px)] flex flex-col items-start justify-start text-left text-5xl text-gray-200">
-                <div className="bg-dimgray w-[1440px] flex flex-col items-center justify-center py-[35px] px-2.5 box-border">
-                    <div className="rounded-6xl bg-white w-[700px] flex flex-row items-center justify-start py-0 pr-0 pl-[30px] box-border gap-[20px] opacity-[0.85]">
-                        <b className="self-stretch flex-1 relative flex items-center">
-                            Enter your email address
-                        </b>
-                        <div className="rounded-6xl bg-royalblue w-[174px] h-24 flex flex-row items-center justify-center py-5 px-[25px] box-border text-white">
-                            <b className="relative">Join Now</b>
-                        </div>
+            <div className="bottom-[0px] left-[calc(50%_-_720px)] flex flex-col items-start justify-start text-left text-5xl text-gray-200">
+                <div className="w-full bg-dimgray flex flex-col items-center justify-center py-[35px] px-2.5 box-border">
+                    <div className="rounded-[25px] bg-white w-[600px] flex flex-row items-center justify-start gap-[15px]">
+                        <input placeholder='Enter your email address'
+                            className='w-full text-xl border-none p-6 bg-transparent text-black outline-none'
+                        />
+                        <button className="self-stretch px-5 text-xl font-medium flex-none text-white bg-royalblue border-none p-4 rounded-[25px]" type="button">
+                            Join Now
+                        </button>
                     </div>
                 </div>
-                <div className="bg-black w-[1440px] flex flex-col items-center justify-center py-[50px] px-[500px] box-border gap-[50px] text-center text-29xl text-white">
-                    <div className="self-stretch flex flex-row items-center justify-center p-2.5">
-                        <b className="relative">Contact Us</b>
+
+                <div className="w-full bg-black  flex flex-col items-center justify-center py-[50px] box-border gap-[50px] text-center text-29xl text-white">
+                    <div>
+                        <b>Contact Us</b>
                     </div>
-                    <div className="flex flex-col items-start justify-start gap-[25px] text-left text-xl">
-                        <div className="w-[600px] flex flex-row items-center justify-center gap-[40px]">
-                            <b className="flex-1 relative">Names</b>
-                            <div className="relative rounded-3xs bg-gainsboro-200 w-[460px] h-[50px]" />
+                    <div className="bg-yellows-300 flex flex-col items-start justify-start gap-[25px] text-left text-xl">
+                        <div className="flex flex-row items-center justify-center gap-[40px]">
+                            <b className="w-[100px]">Names:</b>
+                            <input className="border-none rounded-2xl bg-white bg-opacity-80  w-[460px] h-[50px]" />
                         </div>
-                        <div className="w-[600px] flex flex-row items-center justify-center gap-[40px]">
-                            <b className="flex-1 relative">Email</b>
-                            <div className="relative rounded-3xs bg-gainsboro-200 w-[460px] h-[50px]" />
+                        <div className="flex flex-row items-center justify-center gap-[40px]">
+                            <b className="w-[100px]">Email:</b>
+                            <input className="border-none rounded-2xl bg-white bg-opacity-80 w-[460px] h-[50px]" />
                         </div>
                         <div className="flex flex-row items-start justify-start gap-[40px]">
-                            <b className="relative inline-block w-[100px] h-[50px] shrink-0">
-                                Message:
-                            </b>
-                            <div className="relative rounded-3xs bg-gray-300 w-[460px] h-[150px]" />
+                            <b className="w-[100px]">Message:</b>
+                            <input className="border-none rounded-2xl bg-white bg-opacity-80 w-[460px] h-[150px]" />
                         </div>
+
                         <div className="self-stretch flex flex-col items-end justify-center">
                             <div className="rounded-xl bg-royalblue w-[198px] flex flex-row items-center justify-center py-5 px-[15px] box-border">
                                 <b className="relative">Send</b>
@@ -154,7 +148,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
             {/* <div className="absolute top-[917px] left-[120px] flex flex-col items-start justify-start gap-[30px] text-left text-21xl text-black">
                 <div className="self-stretch flex flex-row items-center justify-center p-2.5 text-center text-29xl">
                     <b className="relative">Our Features</b>
