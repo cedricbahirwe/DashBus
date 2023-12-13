@@ -23,7 +23,7 @@ const about = () => {
                 <div className="container h-100">
                     <div className="row h-100 align-items-center">
                         <div className="col-md-12 text-center">
-                            <h1><strong>Welcome to BaljeetVerse Bus Travels</strong></h1>
+                            <h1><strong>Welcome to DashBus Travels</strong></h1>
                             <p>
                                 Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic est
                                 quis et iure tempora minima similique amet cum commodi id rerum,

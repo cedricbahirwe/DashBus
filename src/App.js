@@ -2,6 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/layout/NavBar';
 import Landing from './components/layout/Landing';
+import HomePage from './Home';
 import Routes from './components/routing/Routes';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
@@ -22,12 +23,13 @@ const App = () => {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <NavBar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
-
+          <div className='w-[75%] m-auto'>
+            <NavBar />
+            <Switch>
+              <Route exact path="/" component={HomePage} />
+              <Route component={Routes} />
+            </Switch>
+          </div>
         </Fragment>
       </Router>
     </Provider>

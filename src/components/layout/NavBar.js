@@ -6,33 +6,56 @@ import { logout } from '../../actions/auth'
 
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
-        <ul>    <li><Link to="/">
-            Search Buses </Link></li>
+        <>
 
+            <li className='grow'>
+                <Link className='text-white no-underline' to="/">
+                    Search Buses
+                </Link>
+            </li>
 
-            <li><Link to="/profile"><i className="fas fa-user" >{'   '}
-                Profile</i></Link></li>
-            <li><a onClick={logout} href="#!">
-                <i className="fas fa-sign-out-alt">{'   '}Logout</i></a></li>
-        </ul>
+            <li className='grow'>
+                <Link className='text-white no-underline' to="/profile">
+                    <i className="fas fa-user" >{'   '}
+                        Profile
+                    </i>
+                </Link>
+            </li>
+
+            <li className='grow'>
+                <a onClick={logout} href="#!" className='text-white no-underline' to="/profile">
+                    <i className="fas fa-sign-out-alt" >{'   '}
+                        Logout
+                    </i>
+                </a>
+            </li>
+        </>
     )
 
     const guestLinks = (
-        <ul>
-
-            <li><Link to="/about">About</Link> </li>
-            <li><Link to="/register">Register</Link></li>
-            <li><Link to="/login">Login</Link></li>
-        </ul>
-
+        <>
+            <li className='grow'><Link className='text-white no-underline' to="/about">About Us</Link> </li>
+            <li className='grow'><Link className='text-white no-underline' to="/register">Register</Link></li>
+            <li className='grow'><Link className='text-white no-underline' to="/login">Login</Link></li>
+        </>
     )
 
     return (
-        <nav className="navbar bg-dark">
-            <h1>
-                <Link to="/"> BaljeetVerse</Link>
-            </h1>
-            {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
+        <nav className="font-bold bg-dimgray text-center text-xl font-inter py-1">
+            <div className='flex flex-row w-[80%] mx-auto gap-3 px-1'>
+                <ul className='flex flex-row w-full items-center justify-center list-none'>
+                    <li className='grow'><Link className='text-white no-underline' to="/">DashBus</Link> </li>
+                    {!loading && (
+                        <Fragment>
+                            {!isAuthenticated ? authLinks : guestLinks}
+                        </Fragment>
+                    )}
+                </ul>
+
+                <button className="self-center text-sm font-medium flex-none text-white bg-royalblue border-none p-4 rounded-full" type="button">
+                    Book Ticket Now
+                </button>
+            </div>
         </nav>
     )
 }
