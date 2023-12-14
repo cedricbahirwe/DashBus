@@ -16,17 +16,16 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
             <li className='grow'>
                 <Link className='text-white no-underline' to="/profile">
-                    <i className="fas fa-user" >{'   '}
-                        Profile
-                    </i>
+                    <i className="fas fa-user pr-1" />
+                    Profile
+
                 </Link>
             </li>
 
             <li className='grow'>
                 <a onClick={logout} href="#!" className='text-white no-underline' to="/profile">
-                    <i className="fas fa-sign-out-alt" >{'   '}
-                        Logout
-                    </i>
+                    <i className="fas fa-sign-out-alt pr-1" />
+                    Logout
                 </a>
             </li>
         </>

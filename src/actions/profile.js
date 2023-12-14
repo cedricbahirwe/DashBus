@@ -14,7 +14,8 @@ import {
 
 export const getCurrentProfile = () => async dispatch => {
     try {
-        const res = await axios.get('/api/profile/me')
+        const userId = localStorage.getItem('userId');
+        const res = await axios.get('http://localhost:8080/admin/' + userId);
 
         dispatch({
             type: GET_PROFILE,

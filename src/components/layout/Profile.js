@@ -10,22 +10,35 @@ const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
     }, [getCurrentProfile])
     return (
         <Fragment>
-            <div className="profile-grid my-1">
+            <div className="bg-slate-200 my-10 rounded-3xl p-5">
                 <div className="profile-top bg-primary p-2">
-                    <h3 className="x-large">{user && user.company}</h3>
-                    <h1 className="large"><i className="fas fa-user"></i> {user && user.name}</h1>
-                    <div className="icons my-1">
-                        <h3>
-                            <i className="fas fa-globe fa-2x" />  {user && user.email}
-                        </h3>
-                        <h3>
-                            <i className="fas fa-phone fa-2x" />  {user && user.contact}
-                        </h3>
+                    <i class="fa fa-user fa-5x text-royalblue"></i>
+                    <h2>Username: @{user && user.username}</h2>
+                    <h2>Full Name: {user && user.firstName + ' ' + user.lastName}</h2>
+                    <div className='text-royalblue'>
+                        {user && user.email &&
+                            <h3>
+                                <i className="fas fa-globe text-royalblue" /> {user && user.email}
+                            </h3>
+                        }
+
+                        {user && user.phoneNumber &&
+                            <h3 >
+                                <i className="fas fa-phone" /> {user && user.phoneNumber}
+                            </h3>
+
+                        }
+
+                        {user && user.email &&
+                            <h3 className='text-royalblue'>
+                                <i className="fas fa-envelope" /> {user && user.email}
+                            </h3>
+                        }
                     </div>
                 </div>
-                <div className="profile-exp bg-white p-2">
+                <div className="bg-white rounded-2xl px-5 py-2">
                     <h2 className="text-primary">Booked  Buses</h2>
-                    <ul>
+                    {/* <ul>
                         {user && user.ticket.length > 0 ? (<Fragment>
                             {user.buses.map(bus => (
                                 <li key={bus._id}>
@@ -45,7 +58,7 @@ const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
                                         </div>
                                     </div></li>
                             ))}
-                        </Fragment>) : (<h4>No Tickets Found.</h4>)}</ul>
+                        </Fragment>) : (<h4>No Tickets Found.</h4>)}</ul> */}
                 </div>
             </div>
         </Fragment>
