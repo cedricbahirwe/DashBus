@@ -47,10 +47,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
                     <li className='grow'><Link className='text-white no-underline' to="/">DashBus</Link> </li>
                     {!loading && (
                         <Fragment>
-                            {!isAuthenticated ? authLinks : guestLinks}
+                            {isAuthenticated ? authLinks : guestLinks}
                         </Fragment>
                     )}
                 </ul>
+
 
                 <button className="self-center text-sm font-medium flex-none text-white bg-royalblue border-none p-4 rounded-full" type="button">
                     Book Ticket Now

@@ -142,7 +142,7 @@ const HomePage = () => {
                 <div className="flex flex-row items-start justify-start py-2.5 px-0 gap-[50px]">
                     <img
                         className="bg-slate-300 rounded-3xl w-[500px] h-[300px] object-contain"
-                        alt="Invoice Picture"
+                        alt="Bus Invoice"
                         src={process.env.PUBLIC_URL + '/invoice.png'}
                     />
                     <div className="self-stretch flex flex-col items-start justify-start gap-[15px]">

@@ -1,12 +1,21 @@
 import React, { Fragment } from 'react'
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
     return (
         <Fragment>
-            <h1 className="x-large text-primary">
-                <i className="fas fa-exclamation-triangle"> Page Not Found. </i>
-            </h1>
-            <p className="large"> Sorry, this page does not exist. </p>
+            <div className='flex flex-col justify-center items-center bg-slate-200 h-[500px]'>
+                <h1 className="">
+                    Page Not Found.
+                </h1>
+                <div className='flex space-x-2 items-center'>
+                    <p>
+                        Sorry, this page does not exist.
+                    </p>
+                    <Link to='/'>Go back Home</Link>
+                </div>
+
+            </div>
         </Fragment>
     )
 }

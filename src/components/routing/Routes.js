@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import '../../App.css';
 import Login from '../auth/Login'
-// import Register from '../auth/Register'
+import Register from '../auth/Register'
 import Alert from '../layout/Alert'
 // import Dashboard from '../dashboard/Dashboard'
 // import CreateProfile from '../profile-forms/CreateProfile'
@@ -27,7 +27,7 @@ const Routes = () => {
         <section className="container">
             <Alert />
             <Switch>
-                {/* <Route exact path="/register" component={Register} /> */}
+                <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/about" component={About} />
                 {/* <Route exact path="/profiles" component={Profiles} />
