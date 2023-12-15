@@ -11,7 +11,7 @@ export const loadUser = () => async dispatch => {
     const userId = localStorage.getItem('userId');
 
     try {
-        const res = await axios.get('http://localhost:8080/admin/' + userId);
+        const res = await axios.get('http://localhost:8080/client/' + userId);
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -69,7 +69,7 @@ export const login = (username, password) => async dispatch => {
     const body = JSON.stringify({ username, password });
     try {
         // const res = await axios.post('/api/auth', body, config)
-        const res = await axios.post('http://localhost:8080/admin/login', body, config)
+        const res = await axios.post('http://localhost:8080/client/login', body, config)
         dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data

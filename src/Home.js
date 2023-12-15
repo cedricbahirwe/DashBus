@@ -8,7 +8,7 @@ import React, { useState, useEffect } from 'react'
 
 //     const getData = async () => {
 //         // const endpoint = 'http://jsonplaceholder.typicode.com/users';
-//         const endpoint = 'http://localhost:8080/admin/';
+//         const endpoint = 'http://localhost:8080/client/';
 //         const response = await fetch(endpoint, {
 //             // mode: 'no-cors',
 //             headers: {

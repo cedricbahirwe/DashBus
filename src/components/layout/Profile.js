@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { getCurrentProfile, removeBus } from '../../actions/profile'
+import { getCurrentProfile, removeTicket } from '../../actions/profile'
 
 
-const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
+const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
     useEffect(() => {
         getCurrentProfile()
     }, [getCurrentProfile])
@@ -12,7 +12,7 @@ const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
         <Fragment>
             <div className="bg-slate-200 my-10 rounded-3xl p-5">
                 <div className="profile-top bg-primary p-2">
-                    <i class="fa fa-user fa-5x text-royalblue"></i>
+                    <i className="fa fa-user fa-5x text-royalblue"></i>
                     <h2>Username: @{user && user.username}</h2>
                     <h2>Full Name: {user && user.firstName + ' ' + user.lastName}</h2>
                     <div className='text-royalblue'>
@@ -37,28 +37,34 @@ const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
                     </div>
                 </div>
                 <div className="bg-white rounded-2xl px-5 py-2">
-                    <h2 className="text-primary">Booked  Buses</h2>
-                    {/* <ul>
-                        {user && user.ticket.length > 0 ? (<Fragment>
-                            {user.buses.map(bus => (
-                                <li key={bus._id}>
-
-                                    <div className="container1">
-                                        <div className="card">
-                                            <div className="box">
-                                                <div className="content">
-                                                    <h2>01</h2>
-                                                    <h3>{bus.name}</h3>
-                                                    <h3>{bus.company}</h3>
-                                                    <span> <h1>Stops:- </h1> <strong> [{bus.stops}] </strong> </span>
-                                                    <span><h1>Bus Id:- </h1>{bus._id}</span>
-                                                    <button className="btn btn-danger" onClick={() => removeBus(bus._id)}>Delete Bus</button>
+                    <h2 className="text-primary">Booked Tickets</h2>
+                    <ul className='grid'>
+                        {
+                            user && user.tickets.length > 0 ?
+                                (<Fragment>
+                                    {user.tickets.map(ticketOrder =>
+                                        <li className='bg-slate-300 bg-opacity-30 rounded-lg list-none p-3 my-3' key={ticketOrder.id}>
+                                            <div className="container1">
+                                                <div className="card">
+                                                    <div className="box">
+                                                        <div className="content">
+                                                            <h2>{ticketOrder.id}</h2>
+                                                            <h3>{ticketOrder.ticket.price} RWF</h3>
+                                                            <h3>{ticketOrder.ticket.origin.name} - {ticketOrder.ticket.destination.name}</h3>
+                                                            {/* <span> <h1>Destination:- </h1> <strong> [{] </strong> </span> */}
+                                                            {/* <button className="btn btn-danger" >Delete Ticket</button> */}
+                                                            <button onClick={() => removeTicket(ticketOrder.id)} class="border-none py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                                                Delete Ticket
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div></li>
-                            ))}
-                        </Fragment>) : (<h4>No Tickets Found.</h4>)}</ul> */}
+                                        </li>
+                                    )}
+                                </Fragment>
+                                ) : (<h4 className='w-full text-red-600 text-center italic'>No Tickets Found.</h4>)}
+                    </ul>
                 </div>
             </div>
         </Fragment>
@@ -69,7 +75,7 @@ const Profile = ({ getCurrentProfile, removeBus, auth: { user } }) => {
 
 Profile.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
-    removeBus: PropTypes.func.isRequired,
+    removeTicket: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 }
 
@@ -77,4 +83,4 @@ const mapStateToProps = state => ({
     auth: state.auth
 })
 
-export default connect(mapStateToProps, { getCurrentProfile, removeBus })(Profile)
+export default connect(mapStateToProps, { getCurrentProfile, removeTicket })(Profile)

@@ -15,13 +15,14 @@ import {
 export const getCurrentProfile = () => async dispatch => {
     try {
         const userId = localStorage.getItem('userId');
-        const res = await axios.get('http://localhost:8080/admin/' + userId);
+        const res = await axios.get('http://localhost:8080/client/' + userId);
 
         dispatch({
             type: GET_PROFILE,
             payload: res.data
         })
     } catch (err) {
+        console.log('Errors at', err)
         dispatch({
             type: PROFILE_ERROR,
             payload: { msg: err.response.statusText, status: err.response.status }
@@ -31,7 +32,7 @@ export const getCurrentProfile = () => async dispatch => {
 }
 
 
-export const removeBus = id => async dispatch => {
+export const removeTicket = id => async dispatch => {
     try {
         const res = await axios.delete(`/api/users/buses/${id}`)
 

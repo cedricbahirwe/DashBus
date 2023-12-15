@@ -8,11 +8,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <>
 
-            <li className='grow'>
+            {/* <li className='grow'>
                 <Link className='text-white no-underline' to="/">
                     Search Buses
                 </Link>
-            </li>
+            </li> */}
 
             <li className='grow'>
                 <Link className='text-white no-underline' to="/profile">
