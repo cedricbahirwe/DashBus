@@ -49,19 +49,14 @@ export default class App extends React.Component {
 
     increment = () => {
         if (this.state.ticketCount < this.state.selectedTicket.remainingPlaces) {
-            this.setState({
-                ticketCount: this.state.ticketCount + 1
-            });
+            this.state.ticketCount += 1
             this.calculateDiscount();
-
         }
     };
 
     decrement = () => {
         if (this.state.ticketCount > 1) {
-            this.setState({
-                ticketCount: this.state.ticketCount - 1
-            });
+            this.state.ticketCount -= 1
             this.calculateDiscount();
         }
     };
@@ -117,32 +112,47 @@ export default class App extends React.Component {
                 {this.state.selectedTicket &&
                     <div className="flex flex-col w-[40%] flex-auto font-inter border border-solid border-[#e2e2e2] rounded-lg">
                         <h3 className='m-0 p-3'>E-Ticket</h3>
-
-                        {/* <p>{this.state.selectedTicket}</p> */}
                         <div className='bg-[#F8F8F8] p-2'>
                             <div>
                                 <p><b>Main Contact - </b>{this.state.selectedTicket.admin.firstName} {this.state.selectedTicket.admin.lastName}</p>
                                 <hr />
                                 <p><b>Phone - </b>{this.state.selectedTicket.admin.phoneNumber}</p>
-                                <hr />
-
-                                <p className=''>
-                                    <b>{format(new Date(), 'EEE, MMM dd, yyyy')}</b>
-                                </p>
                             </div>
                         </div>
 
+                        <div>
+                            <hr />
 
-                        <div className='flex flex-row space-x-2 justify-between items-center px-2'>
-                            <b className='text-[#829BA4]'>No. of Tickets</b>
-                            <p>
-                                <div className="stepper-container">
-                                    <button className="stepper-button" onClick={this.decrement}>-</button>
-                                    <span className="stepper-count">{this.state.ticketCount}</span>
-                                    <button className="stepper-button" onClick={this.increment}>+</button>
-                                </div>
-
+                            <p className='px-2'>
+                                <b>{format(new Date(), 'EEE, MMM dd, yyyy')}</b>
                             </p>
+                            <hr />
+
+                            <div className='flex flex-col space-y-2 px-2'>
+                                <p className='m-0'><b className='text-[#829BA4]'>Depart: </b>{format(new Date(this.state.selectedTicket.departureDateTime), 'HH:mm a')}</p>
+                                <p className='m-0 text-[#829BA4]'><b>{this.state.selectedTicket.origin.name}, {this.state.selectedTicket.origin.abbrev}</b></p>
+                                <p className='m-0'><b className='text-[#829BA4]'>Code: </b>{this.state.selectedTicket.origin.slang}</p>
+                            </div>
+                            <hr className='border-t-[1px] border-dashed border-[#e2e2e2]'></hr>
+
+                            <div className='flex flex-col space-y-2 px-2'>
+                                <p className='m-0'><b className='text-[#829BA4]'>Arrival: </b>{format(new Date(this.state.selectedTicket.arrivalDateTime), 'HH:mm a')}</p>
+                                <p className='m-0 text-[#829BA4]'><b>{this.state.selectedTicket.destination.name}, {this.state.selectedTicket.destination.abbrev}</b></p>
+                                <p className='m-0'><b className='text-[#829BA4]'>Code: </b>{this.state.selectedTicket.destination.slang}</p>
+                            </div>
+                            <hr />
+
+                        </div>
+
+
+                        <div className='flex flex-row space-x-2 justify-between items-center px-2 my-2'>
+                            <b className='text-[#829BA4]'>No. of Tickets</b>
+
+                            <div className="stepper-container">
+                                <button className="stepper-button" onClick={this.decrement}>-</button>
+                                <span className="stepper-count">{this.state.ticketCount}</span>
+                                <button className="stepper-button" onClick={this.increment}>+</button>
+                            </div>
                         </div>
 
                         <hr className='h-[1px] bg-[#e2e2e2] border-none m-0' />
@@ -162,7 +172,7 @@ export default class App extends React.Component {
 
                         <div className='flex flex-row space-x-2 justify-between items-center px-2'>
                             <h1>Due</h1>
-                            <h1 className='text-royalblue'>{(this.state.totalAmount - this.state.ticketDiscount).toLocaleString()}</h1>
+                            <h1 className='text-royalblue'>RWF {(this.state.totalAmount - this.state.ticketDiscount).toLocaleString()}</h1>
                         </div>
                     </div>
                 }
