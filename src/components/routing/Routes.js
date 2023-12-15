@@ -4,7 +4,7 @@ import '../../App.css';
 import Login from '../auth/Login'
 import Register from '../auth/Register'
 import Alert from '../layout/Alert'
-// import Dashboard from '../dashboard/Dashboard'
+import Dashboard from '../dashboard/Dashboard'
 // import CreateProfile from '../profile-forms/CreateProfile'
 // import EditProfile from '../profile-forms/EditProfile'
 // import AddExperience from '../profile-forms/AddExperience'
@@ -17,8 +17,7 @@ import NotFound from '../layout/NotFound'
 import About from '../layout/About'
 import PrivateRoute from '../routing/PrivateRoute'
 // import BookBus from '../layout/BookBus'
-// import PaymentTab from '../layout/PaymentTab/PaymentTab'
-// import SeatSelection from '../layout/SeatSelection/SeatSelection'
+import PaymentTab from '../layout/PaymentTab/PaymentTab'
 // import TicketPage from '../layout/TicketPage/TicketPage'
 
 
@@ -32,13 +31,11 @@ const Routes = () => {
                 <Route exact path="/about" component={About} />
                 {/* <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:id" component={Profile} /> */}
-                {/* <PrivateRoute exact path="/dashboard" component={Dashboard} /> */}
+                <PrivateRoute exact path="/dashboard" component={Dashboard} />
                 <PrivateRoute exact path="/profile" component={Profile} />
                 {/* <PrivateRoute exact path="/book/" component={BookBus} /> */}
-                {/* <PrivateRoute exact path="/book/home" component={PaymentTab} /> */}
-                {/* <PrivateRoute exact path="/book/menu1" component={SeatSelection} />
                 <PrivateRoute exact path="/book/menu2" component={PaymentTab} />
-                <PrivateRoute exact path="/book/ticket" component={TicketPage} /> */}
+                {/* <PrivateRoute exact path="/book/ticket" component={TicketPage} /> */}
                 {/* <PrivateRoute exact path="/create-profile" component={CreateProfile} />
         <PrivateRoute exact path="/edit-profile" component={EditProfile} />
         <PrivateRoute exact path="/add-experience" component={AddExperience} />

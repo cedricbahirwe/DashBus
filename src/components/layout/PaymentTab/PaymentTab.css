@@ -1,0 +1,63 @@
+/* .credit-form {
+	margin-top: 31px;
+	max-width: 400px;
+	margin-right: 19px;
+} */
+
+.actionButton {
+	margin-top: 15px;
+}
+
+.cl1 {
+	float: left;
+	width: 60%;
+}
+
+.columnTwo {
+	/* float: right; */
+	width: 34%;
+	padding: 10px;
+	margin: 0;
+	text-align: center;
+	margin-left: 43px;
+	border: 1px solid rgb(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.603);
+	height: fit-content;
+	border-radius: 5px;
+}
+
+.cvc {
+	width: 57px;
+	margin-left: 27px;
+	text-align: center;
+}
+
+.pt {
+	padding-left: 0;
+}
+.usrName {
+	text-transform: capitalize;
+}
+
+.hdng {
+	font-weight: bold;
+}
+
+.hr1 {
+	background-color: black;
+	width: 38%;
+	position: absolute;
+	left: 51%;
+	top: 37%;
+}
+.hr2 {
+	background-color: black;
+	width: 38%;
+	position: absolute;
+	left: 51%;
+	top: 55%;
+}
+
+.hr3 {
+	background-color: rgba(94, 91, 91, 0.685);
+}

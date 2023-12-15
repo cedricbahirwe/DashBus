@@ -176,18 +176,29 @@ export const okok = ({ start, end }) => async dispatch => {
 }
 
 
-export const searchBuses = ({ start, end }) => async dispatch => {
-    // console.log("third")
+export const searchTickets = ({ start, end }) => async (dispatch) => {
+    console.log("third", start, end)
+
     try {
-        const res = axios.get(`/api/search/${start}/${end}`).then((hii) => {
-            return (hii.data)
-        })
-        return res
-        // dispatch({ 
-        //     payload: res.data
-        // })
-        // console.log(res)
+        const res = await axios.get(`http://localhost:8080/ticket/search/${start}/${end}`)
+        return res.data;
     } catch (err) {
+        console.log("Found", err);
+        const errors = err.response.data.errors
+        if (errors) {
+            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        }
+        console.log('error here')
+    }
+}
+
+export const getAllTickets = () => async (dispatch) => {
+
+    try {
+        const res = await axios.get(`http://localhost:8080/ticket/`)
+        return res.data;
+    } catch (err) {
+        console.log("Found", err);
         const errors = err.response.data.errors
         if (errors) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))

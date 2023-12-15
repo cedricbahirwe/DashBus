@@ -26,7 +26,7 @@ const App = () => {
           <div className='w-[75%] m-auto'>
             <NavBar />
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route exact path="/" component={Landing} />
               <Route component={Routes} />
             </Switch>
           </div>

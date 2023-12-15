@@ -1,154 +1,177 @@
-import React, { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { searchBuses } from '../../actions/profile'
+import { searchTickets, getAllTickets } from '../../actions/profile'
+import { useDispatch } from 'react-redux';
+import { format } from 'date-fns';
 
 const Landing = () => {
-    const [user, exp1] = useState('Tickets here')
+    const [user, exp1] = useState('Tickets there')
+    const [tickets, setSearchResult] = useState(null);
     const [formData, setFormData] = useState({
         start: '',
         end: '',
-        date: ''
-
     });
-    const { start, end, date } = formData;
-    // const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-    const handleToCity = e => {
+    const { start, end } = formData;
+
+    const handleOrigin = e => {
+        e.preventDefault()
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+        localStorage.setItem("start", e.target.value)
+        console.log("Origin", start);
+    }
+
+    const handleDestination = e => {
         e.preventDefault()
         setFormData({ ...formData, [e.target.name]: e.target.value })
         localStorage.setItem("destination", e.target.value)
     }
-    const handleFromCity = e => {
-        e.preventDefault()
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-        localStorage.setItem("start", e.target.value)
-        // console.log(startCity)
+
+    const dispatch = useDispatch();
+
+    const handleSubmit = bId => {
+        localStorage.setItem("selectedTickerId", bId)
     }
-    const handleDate = e => {
-        e.preventDefault()
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-        //    console.log(e.target.value)
-        localStorage.setItem("date", e.target.value)
-    }
-    const onSubmit = (e) => {
+
+    const onSubmit = async (e) => {
         e.preventDefault();
-        const handleSubmit = bId => {
-            localStorage.setItem("selectedBusId", bId)
+
+        if (start.trim().length === 0 || end.trim().length === 0) {
+            const tickets = await dispatch(getAllTickets());
+            setSearchResult(tickets);
+        } else {
+            const tickets = await dispatch(searchTickets({ start, end }));
+            setSearchResult(tickets);
         }
-        searchBuses({ start, end }).then((busData) => {
-            // const func1 = (item) => {
-            //     console.log(item)
-            //     // exp1(<p>Hello jiii yaraaa</p>)
-            // }
-            // user.forEach(func1)
-            exp1(<div className="profile-exp bg-white p-2">
-                <h2 className="text-primary">Buses</h2>
-                <ul>
-                    {busData && busData.length > 0 ? (<Fragment>
-                        {busData.map(bus => (
-                            <li key={bus._id}>
 
-                                <div className="container1">
-                                    <div className="card">
-                                        <div className="box">
-                                            <div className="content">
-                                                <h2>01</h2>
-                                                <h3>{bus.name}</h3>
-                                                <h3>{bus.company}</h3>
-                                                <span> <h1>Stops:- </h1> <strong> [{bus.stops}] </strong> </span>
-                                                <span><h1>Bus Id:- </h1>{bus._id}</span>
-                                                <Link to="/book/menu1" className="btn btn-primary" onClick={(bId) => { handleSubmit(bus._id) }} >Book Bus</Link>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div></li>
-                        ))}
-                    </Fragment>) : (<h4>No Buses Found.</h4>)}</ul>
-            </div>)
-            // console.log(busData.length)
-
-
-            // console.log(user)
-            // return (
-            //     <div>h</div>
-            // )
-        })
+        console.log('reached here', tickets);
+        console.log(user)
     }
 
+    useEffect(async () => {
+        const tickets = await dispatch(getAllTickets());
+        setSearchResult(tickets);
+        // getData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const fieldClassName = "bg-[#365B51] text-white  placeholder-white placeholder-opacity-25 font-bold text-[16px] text-center h-[50px] outline-none rounded-md rounded-md focus:outline-none focus:shadow-outline";
 
     return (
         <div>
 
-            <div className="landing-inner">
-                <h1 className="large">WELCOME TO MODERN BUS TRAVELS</h1>
+            <div className="bg-[#20463C] px-6 py-10">
+                <div className="bg-resd-300 max-w-[60%] mx-auto main-container">
+                    <form className="flex flex-col space-y-5" onSubmit={e => onSubmit(e)}>
+                        <input type="text" placeholder="Where are you?" name="start" data-style="btn-new" className={fieldClassName} value={start} onChange={e => { handleOrigin(e) }} />
 
+                        <input type="text" name="end" placeholder="Where are you going?" data-style="btn-new" className={fieldClassName} value={end} onChange={e => { handleDestination(e) }} />
 
-            </div>
-            {/* <p className="lead">
-                <strong>" Tomorrow's destination arrive today "</strong>
-            </p> */}
-
-            <div className="rdc">
-                <div className="main-container">
-                    <form className="form-inline" onSubmit={e => onSubmit(e)}>
-                        <input type="text" placeholder="From" name="start" data-style="btn-new" className="selectpicker" value={start} onChange={e => { handleFromCity(e) }} />
-
-                        <input type="text" name="end" placeholder="Destination" data-style="btn-new" className="selectpicker" value={end} onChange={e => { handleToCity(e) }} />
-
-                        <input type="date" name="date" value={date} onChange={e => { handleDate(e) }} />
-                        <input type="submit" className=" btn btn-success" value="Search" />
+                        <input type="submit" className="bg-white text-[#20463C] font-bold text-center h-[50px] text-lg rounded-md" value="Search" />
                     </form>
-                    <div className="temp1">
-                        Are you a New User ?
-                        <Link to="/register"> Sign-In</Link>
-                    </div>
-
-                    {/* <div className="profile-exp bg-white p-2">
-                        <h2 className="text-primary">Buses</h2>
-                        <ul>
-                            {user && user.length > 0 ? (<Fragment>
-                                {user.map(bus => (
-                                    <li key={bus._id}>
-
-                                        <div className="container1">
-                                            <div className="card">
-                                                <div className="box">
-                                                    <div className="content">
-                                                        <h2>01</h2>
-                                                        <h3>{bus.name}</h3>
-                                                        <h3>{bus.company}</h3>
-                                                        <span> <h1>Stops:- </h1> <strong> [{bus.stops}] </strong> </span>
-                                                        <span><h1>Bus Id:- </h1>{bus._id}</span>
-                                                        <button className="btn btn-primary">Book Bus</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div></li>
-                                ))}
-                            </Fragment>) : (<h4>No Buses Found.</h4>)}</ul>
-                    </div> */}
-
-                    {/* <button type="button" className="btn btn-link">Link</button>
-                    <button type="button" className="btn btn-link">Link</button> */}
-
-                    {/* <div>
-                    {renderBusList(dataInp)}
-                </div> */}
                 </div>
             </div>
-            <div className="tickets">{user}</div>
-        </div>
+
+            <div>
+                <div class="flex flex-col justify-start mt-0">
+                    <h1 className='flex-1 text-center text-[#20463C]'>Tickets Found</h1>
+                    {
+                        tickets && tickets.length > 0 ? (
+                            <table>
+                                {tickets.map(ticket => (
+                                    <tr className='' key={ticket.id}>
+                                        <td>
+                                            <div>
+                                                <div>
+                                                    <div className="flex h-full flex-col">
+                                                        <div className='px-3 bg-[#F8F8F8] flex justify-between items-center border-[0] border-t border-solid border-[#e2e2e2] mb-3'>
+                                                            <div class="flex items-center">
+                                                                <div
+                                                                    class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-royalblue text-white flex-shrink-0">
+                                                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                                        stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <h3 class="text-base font-light flex space-x-2">
+                                                                    <span>
+                                                                        {ticket.origin.name}, {ticket.origin.abbrev}
+                                                                    </span>
+                                                                    <span>-</span>
+                                                                    <span>
+                                                                        {ticket.destination.name}, {ticket.destination.abbrev}
+                                                                    </span>
+                                                                </h3>
+                                                            </div>
+
+                                                            <div className='flex space-x-2 items-center'>
+                                                                {ticket.discount &&
+                                                                    <span className='text-xs bg-green-500 bg-opacity-70 hover:bg-opacity-100 text-white rounded-full px-3 py-2'>
+                                                                        {ticket.discount}% OFF
+                                                                    </span>
+                                                                }
+
+                                                                <h1 className='text-2xl text-royalblue'>
+                                                                    RWF {ticket.price.toLocaleString()}
+                                                                </h1>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div class="px-3 flex flex-col justify-between flex-grow">
+                                                            <p className="text-xl leading-relaxed m-0">
+                                                                Remaining Tickets: {ticket.remainingPlaces} out of {ticket.defaultPlaces}
+                                                            </p>
+                                                            <div className='flex justify-between'>
+                                                                <p className="flex space-x-5 leading-relaxed text-base">
+                                                                    <span>
+                                                                        Departure - {format(new Date(ticket.departureDateTime), 'HH:mm a')} {ticket.origin.slang}
+                                                                    </span>
+
+                                                                    <span>
+                                                                        Arrival - {format(new Date(ticket.arrivalDateTime), 'HH:mm a')} {ticket.destination.slang}
+                                                                    </span>
+                                                                </p>
+                                                                {ticket.remainingPlaces > 0 ?
+                                                                    (
+                                                                        <Link to="/book/menu2" className="flex self-baseline bg-royalblue rounded-lg  text-white hover:bg-opacity-80 items-center no-underline p-3" onClick={(bId) => { handleSubmit(ticket.id) }} >
+                                                                            Buy Ticket
+                                                                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                                                                                <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                                                            </svg>
+                                                                        </Link>
+                                                                    ) :
+                                                                    (<span href="#" className="self-baseline bg-red-600 rounded-lg bg-opacity-50 text-white  p-3">
+                                                                        Sold Out
+                                                                    </span>)
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </table>
+                        ) : (<h3 className='flex-1 text-center text-red-600'>No Tickets Matching your search.</h3>)
+                    }
+                </div>
+            </div >
+        </div >
     )
 }
 
 Landing.propTypes = {
     isAuthenticated: PropTypes.bool,
-    searchBuses: PropTypes.func.isRequired
+    searchTickets: PropTypes.func.isRequired
 }
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated
 })
 
-export default connect(mapStateToProps, { searchBuses })(Landing)
+export default connect(mapStateToProps, { searchTickets })(Landing)
