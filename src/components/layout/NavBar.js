@@ -51,11 +51,11 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
                     )}
                 </ul>
 
-                {!loading && isAuthenticated &&
+                {/* {!loading && isAuthenticated &&
                     <button className="self-center text-sm font-medium flex-none text-white bg-royalblue border-none p-4 rounded-full" type="button">
                         Book Ticket Now
                     </button>
-                }
+                } */}
             </div>
         </nav>
     )
