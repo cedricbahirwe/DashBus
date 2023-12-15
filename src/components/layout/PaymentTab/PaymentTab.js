@@ -1,42 +1,69 @@
-import React from "react";
+import React, { useState } from 'react'
 import './PaymentTab.css';
 import { Link } from 'react-router-dom';
-// import jwt_decode from 'jwt-decode'
-
+import { format } from 'date-fns';
 
 export default class App extends React.Component {
 
     paymentMethods = ["momo", "paypal", "other"];
-
-    componentDidMount() {
-        // const tok = sessionStorage.getItem("authToken")
-        // const decoded = jwt_decode(tok)
-        // this.setState({ token: decoded.user })
+    state = {
+        paymentMethod: "momo",
+        selectedTicket: null,
+        ticketCount: 1,
+        ticketDiscount: 0,
+        totalAmount: 0
     }
 
-    handleCallback = ({ issuer }, isValid) => {
-        if (isValid) {
-            this.setState({ issuer });
+    calculateDiscount = () => {
+        if (!this.state.selectedTicket) {
+            return;
         }
-    };
+        const total = this.state.selectedTicket.price * this.state.ticketCount;
+        const disc = ((this.state.selectedTicket.discount ?? 0.0) * total) / 100;
 
-    handleInputFocus = ({ target }) => {
         this.setState({
-            focused: target.name
+            totalAmount: total,
+            ticketDiscount: ((this.state.selectedTicket.discount ?? 0.0) * total) / 100
+        })
+    }
+
+    componentDidMount() {
+        const ticketData = localStorage.getItem("selectedTicket");
+
+        const selectedTicket = JSON.parse(ticketData);
+
+        this.setState({
+            selectedTicket: selectedTicket,
+            totalAmount: selectedTicket.price,
+            ticketDiscount: ((selectedTicket.discount ?? 0.0) * selectedTicket.price) / 100
+        })
+
+        this.calculateDiscount(this.state.selectedTicket);
+    }
+
+    handlePaymentMethodChange = (value) => {
+        this.setState({
+            paymentMethod: value
         });
     };
 
-    handleSubmit = e => {
-        e.preventDefault();
-        const formData = [...e.target.elements]
-            .filter(d => d.name)
-            .reduce((acc, d) => {
-                acc[d.name] = d.value;
-                return acc;
-            }, {});
+    increment = () => {
+        if (this.state.ticketCount < this.state.selectedTicket.remainingPlaces) {
+            this.setState({
+                ticketCount: this.state.ticketCount + 1
+            });
+            this.calculateDiscount();
 
-        this.setState({ formData });
-        this.form.reset();
+        }
+    };
+
+    decrement = () => {
+        if (this.state.ticketCount > 1) {
+            this.setState({
+                ticketCount: this.state.ticketCount - 1
+            });
+            this.calculateDiscount();
+        }
     };
 
     moveToTicketPage = (e) => {
@@ -46,55 +73,13 @@ export default class App extends React.Component {
         window.location.href = "/book/ticket"
     }
 
-    renderNamesOfPassenger = () => {
-        let passArray = localStorage.getItem('nameData')
-        if (passArray) {
-            let nameArray = JSON.parse(passArray)
-            console.log(nameArray)
-            return nameArray[0]
-        }
-    }
-
-    renderSeatNumbers = () => {
-        let seatArray = localStorage.getItem('reservedSeats')
-        if (seatArray) {
-            let seaArr = JSON.parse(seatArray)
-            return seaArr.map((seat, idx) => {
-                return (
-                    <p key={idx}>{seat}</p>
-                )
-            })
-        }
-    }
-
-    getSumTotal = () => {
-        let count = 0
-        let tax = 150
-        let seatArray = localStorage.getItem('reservedSeats')
-        if (seatArray) {
-            let seaArr = JSON.parse(seatArray)
-            for (let i = 0; i < seaArr.length; i++) {
-                count++
-            }
-            return (
-                <div>
-                    <hr className="hr3" />
-                    <p>{1000 * count}</p>
-                    <p>+{tax}</p>
-                    <p>{(1000 * count) + tax}</p>
-                </div>
-            )
-        }
-    }
-
     render() {
         return (
-            <div className="flex space-x-4 bg-red-300 p-5">
+            <div className="flex space-x-4 py-5">
 
                 <div className="App-payment self-baseline border border-solid border-[#e2e2e2] rounded-lg flex-shrink overflow-hidden">
-
                     <div className="flex justify-between p-3">
-                        <h2 className="m-0">Choose Payment Method</h2>
+                        <h2 className="font-inter  m-0">Choose Payment Method</h2>
                         <button onClick={e => this.moveToTicketPage(e)} className="font-bold bg-gradient-to-r from-cyan-500 to-royalblue transition ease-in-out  hover:-translate-y-1 hover:scale-110 text-white border-none rounded-lg px-5 py-3">
                             Continue
                         </button>
@@ -106,18 +91,18 @@ export default class App extends React.Component {
                         {
                             this.paymentMethods.map(pMethod => {
                                 return (
-                                    <div key={pMethod} className="bg-slate-300 w-auto">
+                                    <div key={pMethod} className={`w-auto ${pMethod === this.state.paymentMethod ? 'border-4 border-solid border-collapse border-green-600' : ''}`}>
 
                                         <img
-                                            className="w-full"
-                                            alt={'/' + { pMethod } + '.png'}
+                                            className="w-full h-full object-cover"
+                                            alt={'Logo of ' + pMethod}
                                             src={process.env.PUBLIC_URL + '/' + pMethod + '.png'}
+                                            onClick={() => this.handlePaymentMethodChange(pMethod)}
                                         />
                                     </div>
                                 )
                             })
                         }
-
                     </div>
 
                     <div className="bg-[#F8F8F8] bg-opacity-45 p-3">
@@ -129,39 +114,58 @@ export default class App extends React.Component {
                     </div>
                 </div>
 
-                <div className="flex flex-col w-[40%] flex-auto p-6 border border-solid border-[#e2e2e2] rounded-lg">
-                    <h3>Baljeet Travels</h3>
-                    <div>
-                        <p>BOOKING DETAILS</p>
-                        <div className="row">
-                            <div className="col-6 pt">
-                                <p className="hdng">Username</p>
-                                <hr className="hr3" />
-                                <p className="hdng">Date</p>
-                                <p className="hdng">From</p>
-                                <p className="hdng">To</p>
-                                <hr className="hr3" />
-                                <p className="hdng">Passengers</p>
-                                {this.renderNamesOfPassenger()}
-                                <hr className="hr3" />
-                                <p className="hdng">Ticket price</p>
-                                <p className="hdng">Tax</p>
-                                <p className="hdng">Toal Sum</p>
+                {this.state.selectedTicket &&
+                    <div className="flex flex-col w-[40%] flex-auto font-inter border border-solid border-[#e2e2e2] rounded-lg">
+                        <h3 className='m-0 p-3'>E-Ticket</h3>
 
-                            </div>
-                            <div className="col-6">
-                                <hr className="hr3" />
-                                <p className="usrName">{localStorage.getItem("date")}</p>
-                                <p className="usrName">{localStorage.getItem("start")}</p>
-                                <p className="usrName">{localStorage.getItem("destination")}</p>
-                                <hr className="hr3" />
-                                <p className="hdng">Seat No</p>
-                                {this.renderSeatNumbers()}
-                                <p>{this.getSumTotal()}</p>
+                        {/* <p>{this.state.selectedTicket}</p> */}
+                        <div className='bg-[#F8F8F8] p-2'>
+                            <div>
+                                <p><b>Main Contact - </b>{this.state.selectedTicket.admin.firstName} {this.state.selectedTicket.admin.lastName}</p>
+                                <hr />
+                                <p><b>Phone - </b>{this.state.selectedTicket.admin.phoneNumber}</p>
+                                <hr />
+
+                                <p className=''>
+                                    <b>{format(new Date(), 'EEE, MMM dd, yyyy')}</b>
+                                </p>
                             </div>
                         </div>
+
+
+                        <div className='flex flex-row space-x-2 justify-between items-center px-2'>
+                            <b className='text-[#829BA4]'>No. of Tickets</b>
+                            <p>
+                                <div className="stepper-container">
+                                    <button className="stepper-button" onClick={this.decrement}>-</button>
+                                    <span className="stepper-count">{this.state.ticketCount}</span>
+                                    <button className="stepper-button" onClick={this.increment}>+</button>
+                                </div>
+
+                            </p>
+                        </div>
+
+                        <hr className='h-[1px] bg-[#e2e2e2] border-none m-0' />
+
+                        <div className='flex flex-row space-x-2 justify-between items-center px-2 py-2'>
+                            <b className='text-[#829BA4] font-normal'>Total: </b>
+                            <b className='text-red-500'>RWF {this.state.totalAmount}</b>
+                        </div>
+
+                        <div className='flex flex-row space-x-2 justify-between items-center px-2 py-2'>
+                            <b className='text-[#829BA4] font-normal'>Disount: </b>
+                            <b className='text-red-500'>- RWF {this.state.ticketDiscount}</b>
+                        </div>
+
+                        <hr className='h-[1px] bg-[#e2e2e2] border-none m-0' />
+
+
+                        <div className='flex flex-row space-x-2 justify-between items-center px-2'>
+                            <h1>Due</h1>
+                            <h1 className='text-royalblue'>{(this.state.totalAmount - this.state.ticketDiscount).toLocaleString()}</h1>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         );
     }

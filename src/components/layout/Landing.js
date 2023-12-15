@@ -30,8 +30,8 @@ const Landing = () => {
 
     const dispatch = useDispatch();
 
-    const handleSubmit = bId => {
-        localStorage.setItem("selectedTickerId", bId)
+    const handleSubmit = ticket => {
+        localStorage.setItem("selectedTicket", JSON.stringify(ticket));
     }
 
     const onSubmit = async (e) => {
@@ -135,7 +135,7 @@ const Landing = () => {
                                                                 </p>
                                                                 {ticket.remainingPlaces > 0 ?
                                                                     (
-                                                                        <Link to="/book/menu2" className="flex self-baseline bg-royalblue rounded-lg  text-white hover:bg-opacity-80 items-center no-underline p-3" onClick={(bId) => { handleSubmit(ticket.id) }} >
+                                                                        <Link to="/book/menu2" className="flex self-baseline bg-royalblue rounded-lg  text-white hover:bg-opacity-80 items-center no-underline p-3" onClick={() => { handleSubmit(ticket) }} >
                                                                             Buy Ticket
                                                                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                                                 stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
