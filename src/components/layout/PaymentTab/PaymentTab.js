@@ -12,7 +12,7 @@ export default class App extends React.Component {
         ticketCount: 1,
         ticketDiscount: 0,
         totalAmount: 0
-    }
+    };
 
     calculateDiscount = () => {
         if (!this.state.selectedTicket) {
@@ -25,7 +25,7 @@ export default class App extends React.Component {
             totalAmount: total,
             ticketDiscount: ((this.state.selectedTicket.discount ?? 0.0) * total) / 100
         })
-    }
+    };
 
     componentDidMount() {
         const ticketData = localStorage.getItem("selectedTicket");
@@ -63,8 +63,9 @@ export default class App extends React.Component {
 
     moveToTicketPage = (e) => {
         e.preventDefault()
-        // localStorage.setItem("paymentData", JSON.stringify(this.state.token))
-        window.alert('Payment Successful.')
+        localStorage.setItem("paymentMethod", JSON.stringify(this.state.paymentMethod))
+        localStorage.setItem("ticketCount", JSON.stringify(this.state.ticketCount))
+        window.alert('Ticket Purchased Successfully.')
         window.location.href = "/book/ticket"
     }
 
@@ -126,6 +127,7 @@ export default class App extends React.Component {
                             <p className='px-2'>
                                 <b>{format(new Date(), 'EEE, MMM dd, yyyy')}</b>
                             </p>
+
                             <hr className='mx-3' />
 
                             <div className='flex flex-col space-y-2 px-2'>
@@ -133,7 +135,8 @@ export default class App extends React.Component {
                                 <p className='m-0 text-[#829BA4]'><b>{this.state.selectedTicket.origin.name}, {this.state.selectedTicket.origin.abbrev}</b></p>
                                 <p className='m-0'><b className='text-[#829BA4]'>Code: </b>{this.state.selectedTicket.origin.slang}</p>
                             </div>
-                            <hr className='border-t-[1px] border-dashed border-[#e2e2e2] mx-3'></hr>
+
+                            <hr className='border-t-[1px] border-dashed border-[#e2e2e2] mx-3' />
 
                             <div className='flex flex-col space-y-2 px-2'>
                                 <p className='m-0'><b className='text-[#829BA4]'>Arrival: </b>{format(new Date(this.state.selectedTicket.arrivalDateTime), 'HH:mm a')}</p>
@@ -161,10 +164,13 @@ export default class App extends React.Component {
                             <b className='text-red-500'>RWF {this.state.totalAmount}</b>
                         </div>
 
-                        <div className='flex flex-row space-x-2 justify-between items-center px-2 py-2'>
-                            <b className='text-[#829BA4] font-normal'>Disount: </b>
-                            <b className='text-red-500'>- RWF {this.state.ticketDiscount}</b>
-                        </div>
+                        {
+                            this.state.ticketDiscount > 0 &&
+                            <div className='flex flex-row space-x-2 justify-between items-center px-2 py-2'>
+                                <b className='text-[#829BA4] font-normal'>Discount: </b>
+                                <b className='text-red-500'>- RWF {this.state.ticketDiscount}</b>
+                            </div>
+                        }
 
                         <hr className='h-[1px] bg-[#e2e2e2] border-none m-0 mx-3' />
 

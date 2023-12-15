@@ -18,7 +18,7 @@ import About from '../layout/About'
 import PrivateRoute from '../routing/PrivateRoute'
 // import BookBus from '../layout/BookBus'
 import PaymentTab from '../layout/PaymentTab/PaymentTab'
-// import TicketPage from '../layout/TicketPage/TicketPage'
+import TicketPage from '../layout/TicketPage/TicketPage'
 
 
 const Routes = () => {
@@ -35,7 +35,7 @@ const Routes = () => {
                 <PrivateRoute exact path="/profile" component={Profile} />
                 {/* <PrivateRoute exact path="/book/" component={BookBus} /> */}
                 <PrivateRoute exact path="/book/menu2" component={PaymentTab} />
-                {/* <PrivateRoute exact path="/book/ticket" component={TicketPage} /> */}
+                <PrivateRoute exact path="/book/ticket" component={TicketPage} />
                 {/* <PrivateRoute exact path="/create-profile" component={CreateProfile} />
         <PrivateRoute exact path="/edit-profile" component={EditProfile} />
         <PrivateRoute exact path="/add-experience" component={AddExperience} />
