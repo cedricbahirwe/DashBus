@@ -14,13 +14,14 @@ const Login = ({ login, isAuthenticated }) => {
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = async (e) => {
         e.preventDefault();
-        console.log('Felt it', username === '', password === '')
 
         if (username === '') {
-            setAlert('Username should not be empty', 'danger')
+            window.alert('Username should not be empty')
+            return;
 
         } else if (password.trim().length < 6) {
-            setAlert('Password should have at least 6 characters', 'danger')
+            window.alert('Password should have at least 6 characters')
+            return;
         } else {
             login(username, password)
         }

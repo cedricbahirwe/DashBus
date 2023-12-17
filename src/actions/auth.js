@@ -10,11 +10,21 @@ export const loadUser = () => async dispatch => {
 
     const userId = localStorage.getItem('userId');
 
+    if (!userId) {
+        return;
+    }
+
     try {
-        const res = await axios.get('http://localhost:8080/client/' + userId);
+        const response = await axios.get('http://localhost:8080/client/' + userId);
+
+        if (response.status >= 200 && response.status < 300) {
+            const user = response.data;
+            localStorage.setItem('firstName', user.firstName)
+            localStorage.setItem('lastName', user.lastName)
+        }
         dispatch({
             type: USER_LOADED,
-            payload: res.data
+            payload: response.data
         })
     } catch (err) {
         console.log(err)
@@ -25,25 +35,26 @@ export const loadUser = () => async dispatch => {
 
 }
 
-export const register = ({ name, email, password, contact, dob, gender }) => async dispatch => {
+export const register = ({ firstName, lastName, username, dob, phoneNumber, email, password }) => async dispatch => {
     const config = {
         headers: {
             'Content-Type': 'application/json'
         }
     };
 
-    const body = JSON.stringify({ name, email, password, contact, dob, gender });
+    const body = JSON.stringify({ firstName, lastName, username, dob, phoneNumber, email, password });
     try {
-        const res = await axios.post('/api/users', body, config)
+        const res = await axios.post('http://localhost:8080/client/register', body, config)
         dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
         });
+        setManualToken(res.data.id);
         dispatch(loadUser())
     } catch (err) {
-        const errors = err.response.data.errors;
-        if (errors) {
-            errors.forEach(error => dispatch(setAlert(error.msg, 'danger')))
+        const error = err.response;
+        if (error) {
+            dispatch(setAlert(error.message, 'danger'))
         }
         dispatch({
             type: REGISTER_FAIL
@@ -80,9 +91,9 @@ export const login = (username, password) => async dispatch => {
         setManualToken(res.data.id);
         dispatch(loadUser())
     } catch (err) {
-        console.log('Errors:', err.response.data.error);
+        console.log('Errors:', err);
 
-        dispatch(setAlert(err.response.data.error, 'danger'));
+        dispatch(setAlert(err.response, 'danger'));
         dispatch({
             type: LOGIN_FAIL
         });

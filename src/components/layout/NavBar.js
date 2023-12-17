@@ -29,7 +29,7 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     )
 
     return (
-        <nav className="font-bold bg-dimgray text-center text-xl font-inter py-1">
+        <nav className="font-bold bg-dimgray text-center text-xl font-inter py-1 rounded-2xl">
             <div className='flex flex-row w-[80%] mx-auto gap-3 px-1'>
                 <ul className='flex flex-row w-full items-center justify-center list-none'>
                     <li className='grow'><Link className='text-white no-underline' to="/">DashBus</Link> </li>

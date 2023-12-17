@@ -20,12 +20,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log('felt it');
-        if (email === '') {
-            setAlert('Username should not be empty', 'danger')
+        if (username === '') {
+            window.alert('Username should not be empty');
 
         } else if (password === '') {
-            setAlert('Password should not be empty', 'danger')
+            window.alert('Password should not be empty');
         } else {
             register({ firstName, lastName, username, dob, phoneNumber, email, password })
         }
@@ -54,10 +53,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 </div>
 
                 <div className="flex flex-col mb-3">
-                    <label className={labelClassName} for="username">
+                    <label className={labelClassName} htmlFor="username">
                         Username
                     </label>
-                    <input className={fieldClassName} id="username" type="text" placeholder="Username" onChange={e => onChange(e)} />
+                    <input className={fieldClassName} name='username' id="username" type="text" placeholder="Username" value={username} onChange={e => onChange(e)} />
                 </div>
                 <div className="flex flex-col mb-3">
                     <label className={labelClassName} htmlFor="email">Email:</label>
@@ -76,10 +75,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
                 </div>
 
                 <div className="flex flex-col mb-3">
-                    <label className=" text-gray-700 text-sm font-bold mb-2" for="password">
+                    <label className=" text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                         Password
                     </label>
-                    <input className="shadow appearance-none border border-red-500 rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" minLength="6" placeholder="*******" onChange={e => onChange(e)} />
+                    <input className="shadow appearance-none border border-red-500 rounded py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" value={password} name='password' id="password" type="password" minLength="6" placeholder="*******" onChange={e => onChange(e)} />
                 </div>
                 <div className="flex flex-col space-y-3 items-center justify-between">
                     <input className="w-full bg-royalblue border-none text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:shadow-outline" type="submit" value="Register" required />

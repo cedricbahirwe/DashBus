@@ -1,30 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import './TicketPage.css'
-import { addTicket } from '../../../actions/profile'
 import { format } from 'date-fns';
 
 export default function TicketPage({ history }) {
-    const saveData = () => {
-        let from = localStorage.getItem("start")
-        let to = localStorage.getItem("destination")
-        let nameArray = localStorage.getItem("nameData")
-        let noArray = localStorage.getItem("reservedSeats")
-        let tokenData = localStorage.getItem("selectedBusId")
-        let dat = localStorage.getItem("date")
-        const formData = { from, to, nameArray, noArray, tokenData, dat }
-        console.log(formData)
-        addTicket(formData)
-        console.log('first point')
-        // addTicket(from, to, nameArray, noArray, tokenData, dat)
-        // console.log(from, to, nameArray, noArray, tokenData, dat)
-    }
-
     const [selectedTicket, setSticket] = useState(null);
+    const [fullName, setFullName] = useState('');
 
     useEffect(() => {
         const ticketData = localStorage.getItem("selectedTicket");
 
         const selectedTicket = JSON.parse(ticketData);
+
+        const firstName = localStorage.getItem('firstName')
+        const lastName = localStorage.getItem('lastName')
+
+        if (firstName && lastName) {
+            setFullName(firstName + " " + lastName);
+        }
+
+
 
         setSticket(selectedTicket);
     }, [])
@@ -62,7 +56,7 @@ export default function TicketPage({ history }) {
 
             <div id='ticketCard'>
                 <h1 className='text-[40px] m-0 py-3 font-semibold'>
-                    Hello! John Smith
+                    Hello! {fullName}
                 </h1>
                 <div className='flex space-x-4'>
                     <div className='text-xl self-baseline flex  space-x-3 px-4 py-4 bg-white rounded-xl'>

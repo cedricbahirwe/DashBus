@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import './PaymentTab.css';
-import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { buyTicket } from '../../../actions/profile'
+import { connect } from 'react-redux'
 
-export default class App extends React.Component {
+class App extends React.Component {
 
-    paymentMethods = ["momo", "paypal", "other"];
+    paymentMethods = ["mobile_money", "paypal", "other"];
     state = {
-        paymentMethod: "momo",
+        paymentMethod: "mobile_money",
         selectedTicket: null,
         ticketCount: 1,
         ticketDiscount: 0,
@@ -19,7 +20,6 @@ export default class App extends React.Component {
             return;
         }
         const total = this.state.selectedTicket.price * this.state.ticketCount;
-        const disc = ((this.state.selectedTicket.discount ?? 0.0) * total) / 100;
 
         this.setState({
             totalAmount: total,
@@ -61,12 +61,30 @@ export default class App extends React.Component {
         }
     };
 
-    moveToTicketPage = (e) => {
+    moveToTicketPage = async (e) => {
         e.preventDefault()
         localStorage.setItem("paymentMethod", JSON.stringify(this.state.paymentMethod))
         localStorage.setItem("ticketCount", JSON.stringify(this.state.ticketCount))
-        window.alert('Ticket Purchased Successfully.')
-        window.location.href = "/book/ticket"
+
+        const ticketId = this.state.selectedTicket.id;
+        const clientId = localStorage.getItem('userId')
+        const paymentMethod = this.state.paymentMethod.toUpperCase()
+        const ticketCount = this.state.ticketCount
+
+        console.log(ticketId, clientId, paymentMethod, ticketCount)
+
+
+        try {
+            // Dispatch the buyTicket action with the required parameters
+            await this.props.buyTicket({ ticketId, clientId, paymentMethod, ticketCount });
+
+            // If successful, display a success message or redirect to the next page
+            window.alert('Ticket Purchased Successfully.');
+            window.location.href = "/book/ticket";
+        } catch (error) {
+            // Handle errors, you may want to show an error message or log the error
+            console.error('Error purchasing ticket:', error);
+        }
     }
 
     render() {
@@ -184,3 +202,10 @@ export default class App extends React.Component {
         );
     }
 }
+
+
+const mapDispatchToProps = (dispatch) => ({
+    buyTicket: (params) => dispatch(buyTicket(params)),
+});
+
+export default connect(null, mapDispatchToProps)(App);

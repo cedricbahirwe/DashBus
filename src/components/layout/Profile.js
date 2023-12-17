@@ -3,35 +3,48 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { getCurrentProfile, removeTicket } from '../../actions/profile'
 
-
 const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
     useEffect(() => {
         getCurrentProfile()
     }, [getCurrentProfile])
+
+    const removeAndReload = async (id) => {
+
+        removeTicket(id)
+        getCurrentProfile()
+
+    }
+
+
     return (
         <Fragment>
             <div className="bg-slate-200 my-10 rounded-3xl p-5">
                 <div className="profile-top bg-primary p-2">
-                    <i className="fa fa-user fa-5x text-royalblue"></i>
+                    <img
+                        className="w-[50px] h-[50px] object-cover"
+                        alt='Logo of DashBus'
+                        src={process.env.PUBLIC_URL + '/appLogo.png'}
+                    />
+
                     <h2>Username: @{user && user.username}</h2>
                     <h2>Full Name: {user && user.firstName + ' ' + user.lastName}</h2>
                     <div className='text-royalblue'>
                         {user && user.email &&
                             <h3>
-                                <i className="fas fa-globe text-royalblue" /> {user && user.email}
+                                🏹 {user && user.email}
                             </h3>
                         }
 
                         {user && user.phoneNumber &&
                             <h3 >
-                                <i className="fas fa-phone" /> {user && user.phoneNumber}
+                                🏹 {user && user.phoneNumber}
                             </h3>
 
                         }
 
                         {user && user.email &&
                             <h3 className='text-royalblue'>
-                                <i className="fas fa-envelope" /> {user && user.email}
+                                🏹 {user && user.email}
                             </h3>
                         }
                     </div>
@@ -53,7 +66,7 @@ const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
                                                             <h3>{ticketOrder.ticket.origin.name} - {ticketOrder.ticket.destination.name}</h3>
                                                             {/* <span> <h1>Destination:- </h1> <strong> [{] </strong> </span> */}
                                                             {/* <button className="btn btn-danger" >Delete Ticket</button> */}
-                                                            <button onClick={() => removeTicket(ticketOrder.id)} class="border-none py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                                            <button onClick={() => removeTicket(ticketOrder.id)} className="border-none py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                                                                 Delete Ticket
                                                             </button>
                                                         </div>
@@ -63,7 +76,7 @@ const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
                                         </li>
                                     )}
                                 </Fragment>
-                                ) : (<h4 className='w-full text-red-600 text-center italic'>No Tickets Found.</h4>)}
+                                ) : (<h4 className='w-full text-red-600 text-center italic'>No Tickets Orders Found.</h4>)}
                     </ul>
                 </div>
             </div>
