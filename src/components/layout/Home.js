@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 // const Component = () => {
 //     const [value, setValue] = useState(0);
@@ -170,18 +171,19 @@ const HomePage = () => {
             </div>
 
             <div className="flex flex-col items-start justify-start text-left text-4xl text-gray-200">
-                <div className="w-full bg-dimgray flex flex-col items-center justify-center py-[35px] px-2.5 box-border">
-                    <div className="rounded-[25px] bg-white w-[600px] flex flex-row items-center justify-start gap-[15px]">
-                        <input placeholder='Enter your email address'
-                            className='w-full text-xl border-none p-6 bg-transparent text-black outline-none'
-                        />
-                        <button className="self-stretch px-5 text-xl font-medium flex-none text-white bg-royalblue border-none p-4 rounded-[25px]" type="button">
-                            Join Now
-                        </button>
+                <div className="w-full bg-dimgray flex flex-col items-center justify-center py-[35px] px-2.5 box-border rounded-2xl">
+                    <div className="rounded-[25px] flex flex-row items-center justify-start gap-[15px]">
+
+
+
                     </div>
+
+                    <Link className=" text-center w-[600px] no-underline px-5 text-xl font-medium flex-none text-white bg-royalblue border-none p-4 rounded-[25px]" to="/login">
+                        Join Now
+                    </Link>
                 </div>
 
-                <div className="w-full bg-black  flex flex-col items-center justify-center py-[50px] box-border gap-[50px] text-center text-29xl text-white">
+                <div className="hidden w-full bg-black  flex flex-col items-center justify-center py-[50px] box-border gap-[50px] text-center text-29xl text-white">
                     <div>
                         <b>Contact Us</b>
                     </div>

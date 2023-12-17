@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { searchTickets, getAllTickets } from '../../actions/profile'
 import { useDispatch } from 'react-redux';
 import { format } from 'date-fns';
 
-const Landing = () => {
+const Landing = ({ isAuthenticated }) => {
     const [user, exp1] = useState('Tickets there')
     const [tickets, setSearchResult] = useState(null);
     const [formData, setFormData] = useState({
@@ -52,11 +52,13 @@ const Landing = () => {
     useEffect(async () => {
         const tickets = await dispatch(getAllTickets());
         setSearchResult(tickets);
-        // getData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fieldClassName = "bg-[#365B51] text-white  placeholder-white placeholder-opacity-25 font-bold text-[16px] text-center h-[50px] outline-none rounded-md rounded-md focus:outline-none focus:shadow-outline";
+
+    if (!isAuthenticated) {
+        return <Redirect to="/home" />
+    }
 
     return (
         <div>

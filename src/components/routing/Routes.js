@@ -4,7 +4,7 @@ import '../../App.css';
 import Login from '../auth/Login'
 import Register from '../auth/Register'
 import Alert from '../layout/Alert'
-import Dashboard from '../dashboard/Dashboard'
+import HomePage from '../layout/Home'
 // import CreateProfile from '../profile-forms/CreateProfile'
 // import EditProfile from '../profile-forms/EditProfile'
 // import AddExperience from '../profile-forms/AddExperience'
@@ -31,7 +31,7 @@ const Routes = () => {
                 <Route exact path="/about" component={About} />
                 {/* <Route exact path="/profiles" component={Profiles} />
         <Route exact path="/profile/:id" component={Profile} /> */}
-                <PrivateRoute exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/home" component={HomePage} />
                 <PrivateRoute exact path="/profile" component={Profile} />
                 {/* <PrivateRoute exact path="/book/" component={BookBus} /> */}
                 <PrivateRoute exact path="/book/menu2" component={PaymentTab} />

@@ -26,7 +26,7 @@ const Login = ({ login, isAuthenticated }) => {
         }
     }
     if (isAuthenticated) {
-        return <Redirect to="/dashboard" />
+        return <Redirect to="/" />
     }
 
     const fieldClassName = "shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";

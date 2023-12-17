@@ -7,24 +7,14 @@ import { logout } from '../../actions/auth'
 const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <>
-
-            {/* <li className='grow'>
-                <Link className='text-white no-underline' to="/">
-                    Search Buses
-                </Link>
-            </li> */}
-
             <li className='grow'>
                 <Link className='text-white no-underline' to="/profile">
-                    <i className="fas fa-user pr-1" />
                     Profile
-
                 </Link>
             </li>
 
             <li className='grow'>
                 <a onClick={logout} href="#!" className='text-white no-underline' to="/profile">
-                    <i className="fas fa-sign-out-alt pr-1" />
                     Logout
                 </a>
             </li>
@@ -33,9 +23,8 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const guestLinks = (
         <>
-            <li className='grow'><Link className='text-white no-underline' to="/about">About Us</Link> </li>
-            <li className='grow'><Link className='text-white no-underline' to="/register">Register</Link></li>
             <li className='grow'><Link className='text-white no-underline' to="/login">Login</Link></li>
+            <li className='grow'><Link className='text-white no-underline' to="/register">Register</Link></li>
         </>
     )
 
