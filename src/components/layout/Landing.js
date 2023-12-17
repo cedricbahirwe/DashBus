@@ -63,7 +63,7 @@ const Landing = ({ isAuthenticated }) => {
     return (
         <div>
 
-            <div className="bg-[#20463C] px-6 py-10">
+            <div className="bg-[#20463C] px-6 py-10 my-5 rounded-2xl">
                 <div className="bg-resd-300 max-w-[60%] mx-auto main-container">
                     <form className="flex flex-col space-y-5" onSubmit={e => onSubmit(e)}>
                         <input type="text" placeholder="Where are you?" name="start" data-style="btn-new" className={fieldClassName} value={start} onChange={e => { handleOrigin(e) }} />
@@ -73,7 +73,7 @@ const Landing = ({ isAuthenticated }) => {
                         <input type="submit" className="bg-white text-[#20463C] font-bold text-center h-[50px] text-lg rounded-md" value="Search" />
                     </form>
                 </div>
-            </div>
+            </div >
 
             <div>
                 <div className="flex flex-col justify-start mt-0">
@@ -109,7 +109,7 @@ const Landing = ({ isAuthenticated }) => {
                                                                 </div>
 
                                                                 <div className='flex space-x-2 items-center'>
-                                                                    {ticket.discount &&
+                                                                    {ticket.discount && ticket.discount > 0 &&
                                                                         <span className='text-xs bg-green-500 bg-opacity-70 hover:bg-opacity-100 text-white rounded-full px-3 py-2'>
                                                                             {ticket.discount}% OFF
                                                                         </span>

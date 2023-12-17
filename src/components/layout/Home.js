@@ -84,9 +84,9 @@ const HomePage = () => {
     }, []);
 
     return (
-        <div className="bg-white w-full overflow-hidden text-center text-xl text-white font-inter">
+        <div className="my-3 bg-white w-full overflow-hidden text-center text-xl text-white font-inter">
 
-            <div className="w-full h-[605px]"
+            <div className="w-full h-[605px] rounded-2xl"
                 style={{
                     backgroundImage: `url(${process.env.PUBLIC_URL}/womanbg.png)`,
                     backgroundRepeat: 'no-repeat',
