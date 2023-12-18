@@ -33,50 +33,6 @@ const Login = ({ login, isAuthenticated }) => {
     const labelClassName = "text-gray-700 text-sm font-bold mb-2";
 
     return (
-        //     <div className="flex-container">
-        //         <div className="row full">
-        //             <div className="col-md-12">
-        //                 <div className="form-container">
-
-        //                     <div className="row sgnUp ">
-        //                         <div className="col-md-6 right-divider pdding">
-        //                             <h3 className="lead-text mn-txt">
-        //                                 Signup Here
-        //                             </h3>
-        //                             <div className="icon-soc-fb">
-        //                                 Facebook
-        //                             </div>
-        //                             <div className="icon-soc-gg">
-        //                                 Google
-        //                             </div>
-        //                         </div>
-        //                         <div className="left-divider">
-        //                             <div className="col-md-6">
-        //                                 <form className="form" onSubmit={e => onSubmit(e)}>
-
-
-
-
-        //                                     <div className="form-group2">
-        //                                         <label htmlFor="email">Email-ID:</label>
-        //                                         <input required name="email" placeholder="Ex:- baljeetsingh@gmail.com" value={email} type="email" className="form-control sgnUp" onChange={e => onChange(e)} />
-        //                                     </div>
-
-
-
-        //                                     <div className="form-group2">
-        //                                         <label htmlFor="password">Password :</label>
-        //                                         <input required id="password" name="password" value={password} placeholder="Ex:-Baljeet@1234" type="password" className="form-control sgnUp" onChange={e => onChange(e)} />
-        //                                     </div>
-
-        //                                     <div className="form-group2">
-        //                                         <input required type="submit" value="Login" className="btn-primary btnn form-submit sub-btn sgnUp" />
-        //                                     </div>
-        //                                     <div>
-        //                                         <small className="form-text text-muted link-text">Don't have account?
-        //                                         </small>
-        //                                         <span className="signuptext"><Link to="/register">Sign-In</Link></span>
-
         <div className="max-w-md mx-auto">
             <form className=" bg-white shadow-lg rounded px-8 py-2 mt-2" onSubmit={e => onSubmit(e)}>
 

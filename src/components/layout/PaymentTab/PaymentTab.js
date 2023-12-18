@@ -75,14 +75,11 @@ class App extends React.Component {
 
 
         try {
-            // Dispatch the buyTicket action with the required parameters
             await this.props.buyTicket({ ticketId, clientId, paymentMethod, ticketCount });
 
-            // If successful, display a success message or redirect to the next page
             window.alert('Ticket Purchased Successfully.');
             window.location.href = "/book/ticket";
         } catch (error) {
-            // Handle errors, you may want to show an error message or log the error
             console.error('Error purchasing ticket:', error);
         }
     }

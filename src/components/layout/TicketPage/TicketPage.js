@@ -24,9 +24,6 @@ export default function TicketPage({ history }) {
     }, [])
 
     const printTicket = () => {
-        // window.print()
-        // document.getElementById('printBtn').style.display = 'none';
-
         let printContents = document.getElementById('ticketCard').innerHTML;
         let originalContents = document.body.innerHTML;
         document.body.innerHTML = printContents;

@@ -65,8 +65,6 @@ export const register = ({ firstName, lastName, username, dob, phoneNumber, emai
 
 function setManualToken(userId) {
     localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c');
-    // localStorage.setItem('username', username);
-    // localStorage.setItem('password', password);
     localStorage.setItem('userId', userId);
 }
 
@@ -79,7 +77,6 @@ export const login = (username, password) => async dispatch => {
 
     const body = JSON.stringify({ username, password });
     try {
-        // const res = await axios.post('/api/auth', body, config)
         const res = await axios.post('http://localhost:8080/client/login', body, config)
         dispatch({
             type: LOGIN_SUCCESS,

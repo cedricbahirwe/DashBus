@@ -33,18 +33,10 @@ const NavBar = ({ auth: { isAuthenticated, loading }, logout }) => {
             <div className='flex flex-row w-[80%] mx-auto gap-3 px-1'>
                 <ul className='flex flex-row w-full items-center justify-center list-none'>
                     <li className='grow'><Link className='text-white no-underline' to="/">DashBus</Link> </li>
-                    {!loading && (
-                        <Fragment>
-                            {isAuthenticated ? authLinks : guestLinks}
-                        </Fragment>
-                    )}
+                    <Fragment>
+                        {isAuthenticated ? authLinks : guestLinks}
+                    </Fragment>
                 </ul>
-
-                {/* {!loading && isAuthenticated &&
-                    <button className="self-center text-sm font-medium flex-none text-white bg-royalblue border-none p-4 rounded-full" type="button">
-                        Book Ticket Now
-                    </button>
-                } */}
             </div>
         </nav>
     )

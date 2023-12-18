@@ -56,14 +56,6 @@ function authReducer(state = initialState, action) {
                 loading: false,
                 user: null
             };
-        // case LOGOUT:
-        //     return {
-        //         ...state,
-        //         token: null,
-        //         isAuthenticated: false,
-        //         loading: false,
-        //         user: null
-        //     };
         default:
             return state;
     }

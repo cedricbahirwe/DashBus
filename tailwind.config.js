@@ -10,10 +10,6 @@ module.exports = {
           "200": "#d9d9d9",
         },
         dimgray: "#513d35",
-        // crimson: "#ff4062",
-        // whitesmoke: "#f8f8f8",
-        // lightslategray: "#829ca4",
-        // seagreen: "#199675",
       },
       spacing: {},
       fontFamily: {
