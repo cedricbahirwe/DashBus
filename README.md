@@ -30,6 +30,11 @@ You can learn more in the [DashBus Spring App](https://github.com/cedricbahirwe/
 | ![Page 4](https://github.com/cedricbahirwe/DashBus/assets/49038614/6f82a4ea-9897-4fec-9410-f424107c4d47)  |
 | 5. Profile Page |
 | ![Page 5](https://github.com/cedricbahirwe/DashBus/assets/49038614/738d9c3e-547a-4aba-802c-17c664ce76e8)  |
+| 6. Payment Page |
+| ![Page 6](https://github.com/cedricbahirwe/DashBus/assets/49038614/d2d2427a-038c-4dc5-997c-1ca825f9376d)  |
+| 7. Ticket Page |
+| ![Page 7](https://github.com/cedricbahirwe/DashBus/assets/49038614/e73e6a49-d0fc-45c6-879a-d6f4530119e6)  |
+
 
 
 
