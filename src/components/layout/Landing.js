@@ -46,13 +46,17 @@ const Landing = ({ isAuthenticated }) => {
         }
 
         console.log('reached here', tickets);
-        console.log(user)
     }
 
-    useEffect(async () => {
-        const tickets = await dispatch(getAllTickets());
-        setSearchResult(tickets);
-    }, []);
+    useEffect(() => {
+
+        async function fetchData() {
+            const tickets = await dispatch(getAllTickets());
+            setSearchResult(tickets);
+        }
+
+        fetchData();
+    }, [dispatch]);
 
     const fieldClassName = "bg-[#365B51] text-white  placeholder-white placeholder-opacity-25 font-bold text-[16px] text-center h-[50px] outline-none rounded-md rounded-md focus:outline-none focus:shadow-outline";
 
