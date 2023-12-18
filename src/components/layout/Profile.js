@@ -15,7 +15,6 @@ const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
 
     }
 
-
     return (
         <Fragment>
             <div className="bg-slate-200 my-10 rounded-3xl p-5">
@@ -66,7 +65,7 @@ const Profile = ({ getCurrentProfile, removeTicket, auth: { user } }) => {
                                                             <h3>{ticketOrder.ticket.origin.name} - {ticketOrder.ticket.destination.name}</h3>
                                                             {/* <span> <h1>Destination:- </h1> <strong> [{] </strong> </span> */}
                                                             {/* <button className="btn btn-danger" >Delete Ticket</button> */}
-                                                            <button onClick={() => removeTicket(ticketOrder.id)} className="border-none py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
+                                                            <button onClick={() => removeAndReload(ticketOrder.id)} className="border-none py-2 px-3 text-sm font-medium text-center text-white bg-red-600 rounded-full hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-900">
                                                                 Delete Ticket
                                                             </button>
                                                         </div>

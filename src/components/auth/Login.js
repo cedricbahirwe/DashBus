@@ -15,10 +15,9 @@ const Login = ({ login, isAuthenticated }) => {
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        if (username === '') {
-            window.alert('Username should not be empty')
+        if (username.trim().length < 3) {
+            window.alert('Username should have at least 3 characters')
             return;
-
         } else if (password.trim().length < 6) {
             window.alert('Password should have at least 6 characters')
             return;
